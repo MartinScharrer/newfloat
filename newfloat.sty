@@ -1,0 +1,105 @@
+%    \begin{macrocode}
+%<!COPYRIGHT>
+\ProvidesPackage{newfloat}[%
+%<!DATE>
+%<!VERSION>
+%<*DRIVER>
+    2099/01/01 develop
+%</DRIVER>
+    Easily define new floats the LaTeX core way]
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+
+\def\newfloat@getucname#1#2\@nnil{%
+    \uppercase{\newfloat@@getucname{#1}}{#2}%
+}
+\def\newfloat@@getucname#1#2{%
+    \def\newfloat@ucname{#1#2}%
+}
+\newcommand*\Newfloat[3][\newfloat@ucname]{%
+    \begingroup
+    \edef\@tempa{#2}%
+    \expandafter
+    \newfloat@getucname\@tempa\@nnil%
+    \edef\@tempa{\endgroup
+        \noexpand\@Newfloat{\@tempa}{\expandafter\noexpand\csname c@\@tempa\endcsname}{#3}{#1}%
+    }%
+    \@tempa
+}
+
+\@ifundefined{c@float@type}{%
+    \newcounter{float@type}%
+    \begingroup
+    \@ifundefined{c@figure}{%
+        \endgroup
+        \setcounter{float@type}{1}%
+    }{
+        \endgroup
+        \setcounter{float@type}{4}%
+    }%
+}{}%
+
+\def\@Newfloat#1#2#3#4{%
+    \begingroup
+    \expandafter\ifx\csname chapter\endcsname\relax
+        \endgroup
+        \newcounter{#1}%
+        \@namedef{the#1}{\@arabic#2}%
+    \else
+        \endgroup
+        \newcounter{#1}[chapter]%
+        \@namedef{the#1}{\ifnum \c@chapter>\z@ \thechapter.\fi \@arabic#2}%
+    \fi
+    \@namedef{fps@#1}{tbp}%
+    \expandafter\edef\csname ftype@#1\endcsname{\the\c@float@type}%
+    \advance\c@float@type by \c@float@type
+    \@ifdefinable{ext@#1}{%
+        \@namedef{ext@#1}{#3}%
+    }%
+    \expandafter\def\csname fnum@#1\expandafter\endcsname\expandafter{%
+        \csname #1name\expandafter\endcsname\expandafter\nobreakspace\csname the#1\endcsname
+    }%
+    \expandafter\let\csname l@#1\endcsname\l@figure
+    \newenvironment{#1}%
+                {\@float{#1}}%
+                {\end@float}%
+    \newenvironment{#1*}%
+                {\@dblfloat{#1}}%
+                {\end@dblfloat}%
+    \newfloat@getucname#1\@nnil%
+    \@ifdefinable{#1name}{%
+        \@namedef{#1name}{#4}%
+    }%
+    \@ifdefinable{list#1name}{%
+        \expandafter\edef\csname list#1name\endcsname{List of #4}%
+    }%
+    \expandafter\newcommand\csname listof#1s\endcsname{\Listof{#1}}%
+}
+
+\begingroup
+\expandafter\ifx\csname chapter\endcsname\relax
+    \endgroup
+    \newcommand\Listof[1]{%
+        \section*{\csname list#1name\endcsname}%
+        \@mkboth{\expandafter\MakeUppercase\csname list#1name\endcsname}%
+                {\expandafter\MakeUppercase\csname list#1name\endcsname}%
+        \expandafter\@starttoc\csname ext@#1\endcsname
+    }
+\else
+    \endgroup
+    \newcommand\Listof[1]{%
+        \if@twocolumn
+            \@restonecoltrue\onecolumn
+        \else
+            \@restonecolfalse
+        \fi
+        \chapter*{\csname list#1name\endcsname}%
+        \@mkboth{\expandafter\MakeUppercase\csname list#1name\endcsname}%
+                {\expandafter\MakeUppercase\csname list#1name\endcsname}%
+        \expandafter\@starttoc\csname ext@#1\endcsname
+        \if@restonecol\twocolumn\fi
+    }
+\fi
+
+%    \end{macrocode}

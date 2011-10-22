@@ -1,0 +1,36 @@
+\documentclass{article}
+
+\usepackage{newfloat}
+\usepackage{lipsum}
+
+\Newfloat{test}{loe}
+\Newfloat[FooBar]{foobar}{lob}
+
+\begin{document}
+\listoftests
+\Listof{foobar}
+
+%\chapter{Test}
+
+See \ref{firsttest} and \ref{firstfoobar}.
+
+\lipsum
+\begin{test}
+    \centering
+    \mbox{\Huge Test}
+    \caption{My first test}\label{firsttest}
+\end{test}
+\begin{foobar}
+    \centering
+    \mbox{\Huge FooBar}
+    \caption{My first foobar}\label{firstfoobar}
+\end{foobar}
+\begin{table}
+    \centering
+    \mbox{\Huge Table}
+    \caption{Compare table}
+\end{table}
+\lipsum
+
+\end{document}
+

@@ -1,0 +1,111 @@
+% \iffalse meta-comment
+%<=*COPYRIGHT>
+%% Copyright (C) 2011 by Martin Scharrer <martin@scharrer-online.de>
+%% ---------------------------------------------------------------------------
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The Current Maintainer of this work is Martin Scharrer.
+%%
+%% This work consists of the files newfloat.dtx and newfloat.ins
+%% and the derived filebase newfloat.sty.
+%%
+%<=/COPYRIGHT>
+% \fi
+%
+% \iffalse
+%<*driver>
+\ProvidesFile{newfloat.dtx}[%
+%<=*DATE>
+    2011/10/22
+%<=/DATE>
+%<=*VERSION>
+    v1.0
+%<=/VERSION>
+    Define new float environments the LaTeX core way]
+\documentclass{ydoc}
+\GetFileInfo{newfloat.dtx}
+\usepackage{newfloat}[\filedate]
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+\begin{document}
+  \DocInput{\jobname.dtx}
+  \PrintChanges
+  \PrintIndex
+\end{document}
+%</driver>
+% \fi
+%
+% \CheckSum{168}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+%
+% \changes{v1.0}{2011/10/22}{First release.}
+%
+% \DoNotIndex{\newcommand,\newenvironment}
+%
+% \GetFileInfo{newfloat.dtx}
+% \author{Martin Scharrer}
+% \email{martin@scharrer.me}
+% \ifdefined\repository
+%   \repository{https://bitbucket.org/martin_scharrer/newfloat}
+% \fi
+%
+% \maketitle
+%
+% \begin{abstract}\noindent
+% This package allows to define new float environment using
+% the exact same way as the \LaTeX\ core floats \env{figure}
+% and \env{table}.
+% \end{abstract}
+%
+% \section{Introduction}
+% Often it is useful to have custom float environments with own captions.
+% There are already some ways available to define new floats, like the \pkg{float} and \pkg{caption} packages
+% or the KOMA-Script and \cls{memoir} classes.
+% However, some of them, like \pkg{float}, use custom styles which do not allow for arbitrary formatting of the environment
+% content. While the caption position can be chosen directly for the core floats by placing one or more \cs{caption} macros accordantly, 
+% this is not possible with floats defined by the \pkg{float} package. The KOMA-Script classes and \pkg{caption} allow for such free-style floats, but
+% are rather large.
+%
+% This package provides a simple interface to define new free-style floats using the same core macros used for \env{figure} and \env{table}.
+% The functionality is limited to this by design. Users which want to have more functionality should try the above mentioned packages and classes.
+%
+% \section{Usage}
+% After loading the package new floats can be defined using the following macro. It should only be used in the document preamble.
+%
+% \DescribeMacro\newfloat
+%
+% \StopEventually{}
+% \clearpage
+% \section{Implementation}
+%
+% \iffalse
+%<@newfloat.sty>
+% \fi
+%
+% \Finale
+\endinput
