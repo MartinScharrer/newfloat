@@ -97,7 +97,19 @@
 % \section{Usage}
 % After loading the package new floats can be defined using the following macro. It should only be used in the document preamble.
 %
-% \DescribeMacro\newfloat
+% \DescribeMacro\Newfloat[<name for captions>]{<name>}{<extension>}
+% This defines a new float environment with the given \meta{name} as well as \env{\meta{name}*} for use with |twocolumn| mode to place it over both columns.
+% A file named \Macro\jobname'.'<extension> will be used to store the list of floats of this type if either \cs{listof<name>s} or \Macro\Listof{<name>} was used.
+% A \meta{name for captions} can be given using the optional argument, otherwise the normal \meta{name} is used with the first letter capitalized.
+%
+% \DescribeMacro\Listof{<name>}
+% Prints the \emph{List of \meta{name}} listing like e.g.\ \Macro\listoffigures does for figures.
+% Alternatively a \cs{listof<name>s} can be used, i.e.\ \Macro\Listof{foobar} is identical to \Macro\listoffoobars.
+%
+% \section{Compatibility}
+% This package is compatible with the \LaTeX\ standard classes which code it uses internally.
+% The macro name \Macro\Newfloat was chosen instead of \Macro\newfloat to be compatible with the \pkg{float} package which define this macro.
+% The compatibility beyond this is not tested yet.
 %
 % \StopEventually{}
 % \clearpage
